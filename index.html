@@ -307,6 +307,15 @@
                 btn.classList.remove('selected');
             });
             event.target.classList.add('selected');
+
+            // Update all unit labels throughout the form
+            const unitDisplay = unit === 'inches' ? '(inches)' : '(centimeters)';
+            document.getElementById('waistUnit').textContent = unitDisplay;
+            document.getElementById('frontRiseUnit').textContent = unitDisplay;
+            document.getElementById('inseamUnit').textContent = unitDisplay;
+            document.getElementById('hipsUnit').textContent = unitDisplay;
+            document.getElementById('thighUnit').textContent = unitDisplay;
+            document.getElementById('legOpeningUnit').textContent = unitDisplay;
         }
 
         function goToStep(stepNum) {
