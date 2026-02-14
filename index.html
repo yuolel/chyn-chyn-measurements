@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHYN CHYN - Measurement Guide</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #d4a44a;
+        }
+
+        .step {
+            display: none;
+            margin: 30px 0;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .tagline {
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 14px;
+        }
+
+        .description {
+            background: #f5f5f5;
+            padding: 15px;
+            margin: 20px 0;
+            border-left: 4px solid #d4a44a;
+        }
+
+        .measurement-img {
+            max-width: 100%;
+            max-height: 400px;
+            height: auto;
+            margin: 20px 0;
+            display: block;
+        }
+
+        .form-group {
+            margin: 25px 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="number"] {
+            width: 200px;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #d4a44a;
+        }
+
+        .unit-select {
+            margin: 30px 0;
+        }
+
+        .unit-btn {
+            padding: 12px 30px;
+            margin: 5px;
+            border: 2px solid #d4a44a;
+            background: white;
+            color: #d4a44a;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .unit-btn.selected {
+            background: #d4a44a;
+            color: white;
+        }
+
+        .buttons {
+            margin: 30px 0;
+            display: flex;
+            gap: 15px;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-next {
+            background: #d4a44a;
+            color: white;
+        }
+
+        .btn-back {
+            background: #666;
+            color: white;
+        }
+
+        .summary-box {
+            background: #f9f9f9;
+            padding: 20px;
+            border: 2px solid #d4a44a;
+            margin: 20px 0;
+            white-space: pre-line;
+            font-family: monospace;
+        }
+
+        .btn-copy {
+            background: #28a745;
+            color: white;
+            width: 100%;
+        }
+
+        .success {
+            color: #28a745;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>CHYN CHYN</h1>
+        <div class="tagline">Custom Chinos Measurement Guide</div>
+    </div>
+
+    <!-- Step 1: Welcome -->
+    <div class="step active" id="step1">
+        <h2>Welcome</h2>
+        <p><strong>Measure a pair of pants that fits you well</strong> - not your body. Use chinos, dress pants, or similar (jeans work too).</p>
+        <p>Measuring pants is easier and more precise than measuring your body.</p>
+
+        <h3 style="margin-top: 30px;">Measurements Reference:</h3>
+        <img src="Etsy sizing - pants.jpg" alt="Measurement reference chart" class="measurement-img" style="border: 2px solid #ddd; padding: 10px; background: white;">
+        <p style="font-size: 14px; color: #666; margin-top: 10px;">We'll guide you through measurements A, C, D, plus Hips, Width at Thigh, and optionally E (leg opening).</p>
+
+        <div class="unit-select">
+            <p><strong>Select your preferred unit:</strong></p>
+            <button class="unit-btn selected" onclick="selectUnit('inches')">Inches</button>
+            <button class="unit-btn" onclick="selectUnit('cm')">Centimeters</button>
+        </div>
+
+        <div class="buttons">
+            <button class="btn-next" onclick="goToStep(2)">Get Started</button>
+        </div>
+    </div>
+
+    <!-- Step 2: Waist -->
+    <div class="step" id="step2">
+        <h2>A - Waist</h2>
+        <div class="description">
+            Place the tape right on top of the seam that connects the waistband to the pants you're measuring.
+        </div>
+        <img src="Waistband (A).png" alt="Waist measurement" class="measurement-img">
+        <div class="form-group">
+            <label>Waist measurement <span id="waistUnit" style="color: #d4a44a;">(inches)</span>:</label>
+            <input type="number" id="waist" step="0.1" placeholder="Enter measurement">
+        </div>
+        <div class="buttons">
+            <button class="btn-back" onclick="goToStep(1)">Back</button>
+            <button class="btn-next" onclick="goToStep(3)">Next</button>
+        </div>
+    </div>
+
+    <!-- Step 3: Front Rise -->
+    <div class="step" id="step3">
+        <h2>C - Front Rise</h2>
+        <div class="description">
+            This is one of the trickiest measurements. Fold the pants in half (like in the photo). Line up the waistband seam and follow the zipper down until you reach the spot where both pant legs are connected, then measure up to that spot where you have a 90-degree angle.
+        </div>
+        <img src="Front rise (C).png" alt="Front rise measurement" class="measurement-img">
+        <div class="form-group">
+            <label>Front Rise measurement <span id="frontRiseUnit" style="color: #d4a44a;">(inches)</span>:</label>
+            <input type="number" id="frontRise" step="0.1" placeholder="Enter measurement">
+        </div>
+        <div class="buttons">
+            <button class="btn-back" onclick="goToStep(2)">Back</button>
+            <button class="btn-next" onclick="goToStep(4)">Next</button>
+        </div>
+    </div>
+
+    <!-- Step 4: Inseam -->
+    <div class="step" id="step4">
+        <h2>D - Inseam</h2>
+        <div class="description">
+            The inseam measurement is pretty straightforward - measure from the crotch seam down to the bottom hem of the pant leg.
+        </div>
+        <img src="Inseam (D).png" alt="Inseam measurement" class="measurement-img">
+        <div class="form-group">
+            <label>Inseam measurement <span id="inseamUnit" style="color: #d4a44a;">(inches)</span>:</label>
+            <input type="number" id="inseam" step="0.1" placeholder="Enter measurement">
+        </div>
+        <div class="buttons">
+            <button class="btn-back" onclick="goToStep(3)">Back</button>
+            <button class="btn-next" onclick="goToStep(5)">Next</button>
+        </div>
+    </div>
+
+    <!-- Step 5: Hips -->
+    <div class="step" id="step5">
+        <h2>Hips</h2>
+        <div class="description">
+            Make sure to place the tape right where the zipper ends, perpendicular to the zipper.
+        </div>
+        <img src="Hips.png" alt="Hips measurement" class="measurement-img">
+        <div class="form-group">
+            <label>Hips measurement <span id="hipsUnit" style="color: #d4a44a;">(inches)</span>:</label>
+            <input type="number" id="hips" step="0.1" placeholder="Enter measurement">
+        </div>
+        <div class="buttons">
+            <button class="btn-back" onclick="goToStep(4)">Back</button>
+            <button class="btn-next" onclick="goToStep(6)">Next</button>
+        </div>
+    </div>
+
+    <!-- Step 6: Width at Thigh -->
+    <div class="step" id="step6">
+        <h2>Width at Thigh</h2>
+        <div class="description">
+            You might want to do this right after you measure the front rise, since the front rise measurement is one side of the 90-degree angle, and width at thigh is the other side of that (but starting at the point where the pant legs meet).
+        </div>
+        <img src="Width at thigh.png" alt="Thigh measurement" class="measurement-img">
+        <div class="form-group">
+            <label>Width at Thigh measurement <span id="thighUnit" style="color: #d4a44a;">(inches)</span>:</label>
+            <input type="number" id="thigh" step="0.1" placeholder="Enter measurement">
+        </div>
+        <div class="buttons">
+            <button class="btn-back" onclick="goToStep(5)">Back</button>
+            <button class="btn-next" onclick="goToStep(7)">Next</button>
+        </div>
+    </div>
+
+    <!-- Step 7: Leg Opening (Optional) -->
+    <div class="step" id="step7">
+        <h2>E - 1/2 Leg Opening (Optional)</h2>
+        <div class="description">
+            Our chinos are slim fit by default, but we can make them narrower or wider depending on your preference. If you'd like to specify the leg opening width, measure half the circumference at the bottom hem. You can skip this if you're happy with a standard slim fit.
+        </div>
+        <div class="form-group">
+            <label>Leg Opening measurement <span id="legOpeningUnit" style="color: #d4a44a;">(inches)</span> (optional):</label>
+            <input type="number" id="legOpening" step="0.1" placeholder="Leave blank to skip">
+        </div>
+        <div class="buttons">
+            <button class="btn-back" onclick="goToStep(6)">Back</button>
+            <button class="btn-next" onclick="goToStep(8)">Review Summary</button>
+        </div>
+    </div>
+
+    <!-- Step 8: Summary -->
+    <div class="step" id="step8">
+        <h2>Your Measurements Summary</h2>
+        <div class="summary-box" id="summaryText"></div>
+        <button class="btn-copy" onclick="copyToClipboard()">Copy to Clipboard</button>
+        <div class="success" id="successMsg">✓ Copied to clipboard!</div>
+
+        <div style="background: #fff3cd; border: 2px solid #d4a44a; padding: 20px; margin: 30px 0; border-radius: 4px;">
+            <p style="margin: 0 0 10px 0;"><strong>Next Steps:</strong></p>
+            <p style="margin: 0;">Please also send photos of the tape on the pants for each measurement, and optionally a photo of yourself (cropped if you wish) for better fit.</p>
+            <p style="margin: 10px 0 0 0;">Send the copied measurements and photos via Etsy message.</p>
+        </div>
+
+        <div class="buttons">
+            <button class="btn-back" onclick="goToStep(7)">Back</button>
+            <button class="btn-back" onclick="goToStep(1)">Start Over</button>
+        </div>
+    </div>
+
+    <script>
+        let unit = 'inches';
+
+        function selectUnit(selectedUnit) {
+            unit = selectedUnit;
+            document.querySelectorAll('.unit-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            event.target.classList.add('selected');
+        }
+
+        function goToStep(stepNum) {
+            // Hide all steps
+            document.querySelectorAll('.step').forEach(step => {
+                step.classList.remove('active');
+            });
+
+            // Show target step
+            document.getElementById('step' + stepNum).classList.add('active');
+
+            // Generate summary if going to step 8
+            if (stepNum === 8) {
+                generateSummary();
+            }
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function generateSummary() {
+            const waist = document.getElementById('waist').value;
+            const frontRise = document.getElementById('frontRise').value;
+            const inseam = document.getElementById('inseam').value;
+            const hips = document.getElementById('hips').value;
+            const thigh = document.getElementById('thigh').value;
+            const legOpening = document.getElementById('legOpening').value;
+
+            const unitText = unit === 'inches' ? 'in' : 'cm';
+            const otherUnit = unit === 'inches' ? 'cm' : 'in';
+            const conversionFactor = unit === 'inches' ? 2.54 : 0.393701;
+
+            function formatMeasurement(value) {
+                if (!value || value === '') return 'Not provided';
+                const converted = (parseFloat(value) * conversionFactor).toFixed(2);
+                return `${value} ${unitText} (${converted} ${otherUnit})`;
+            }
+
+            const summary = `CHYN CHYN Custom Chinos Measurements
+
+Waist (A): ${formatMeasurement(waist)}
+Front Rise (C): ${formatMeasurement(frontRise)}
+Inseam (D): ${formatMeasurement(inseam)}
+Hips: ${formatMeasurement(hips)}
+Width at Thigh: ${formatMeasurement(thigh)}
+Leg Opening (E): ${legOpening ? formatMeasurement(legOpening) : 'Not provided'}`;
+
+            document.getElementById('summaryText').textContent = summary;
+        }
+
+        function copyToClipboard() {
+            const text = document.getElementById('summaryText').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const msg = document.getElementById('successMsg');
+                msg.style.display = 'block';
+                setTimeout(() => {
+                    msg.style.display = 'none';
+                }, 3000);
+            });
+        }
+    </script>
+</body>
+</html>
